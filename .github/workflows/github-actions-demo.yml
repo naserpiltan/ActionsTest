@@ -30,12 +30,17 @@ jobs:
           cd build-cmake
           cmake .. -D QT_DEFAULT_MAJOR_VERSION=6  -D CMAKE_CXX_FLAGS_DEBUG="/g"
           cmake --build .
+      - name: Deploy
+        run: |
+          D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\bin\windeployqt.exe appuntitled11.exe
+
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: windows
           path: |
-            D:\a\ActionsTest\ActionsTest\build-cmake\Debug\appuntitled11.exe
+            Debug\appuntitled11.exe
 
 
 
