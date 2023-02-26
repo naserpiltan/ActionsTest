@@ -1,7 +1,9 @@
 name: Install Qt
+
 run-name: ${{ github.actor }} is installing qt
-uses: jurplel/install-qt-action@v3
+
 on: [push]
+
 jobs:
   build:
     strategy:
