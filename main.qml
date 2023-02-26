@@ -8,6 +8,6 @@ Window {
     Rectangle
     {
         anchors.fill: parent
-        color: "blue"
+        color: "red"
     }
 }
