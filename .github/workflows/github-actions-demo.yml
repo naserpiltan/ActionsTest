@@ -2,21 +2,48 @@ name: Install Qt
 run-name: ${{ github.actor }} is installing qt
 uses: jurplel/install-qt-action@v3
 on: [push]
-with:
-       version: '5.15.2'
-       host: 'windows'
-       target: 'desktop'
-       arch: 'win64_msvc2019_64'
-       dir: '${{ github.workspace }}/example/'
-       install-deps: 'true'
-       modules: 'qtcharts qtwebengine'
-       archives: 'qtbase qtsvg'
-       cache: 'false'
-       cache-key-prefix: 'install-qt-action'
-       setup-python: 'true'
-       tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-       set-env: 'true'
-       tools-only: 'false'
-       aqtversion: '==2.1.*'
-       py7zrversion: '==0.19.*'
-       extra: '--external 7z'
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        qt_version: [6.3.2]
+        platform: [windows-latest]
+        include:
+            - qt_version: 6.4.0
+              additional_arguments: -D QT_DEFAULT_MAJOR_VERSION=6
+              build_cmake: true
+            - platform: windows-latest
+              make: nmake
+              QMAKE_MSC_VER: 16.11.31911.196
+              cmake_params: -D CMAKE_CXX_FLAGS_DEBUG="/g"
+              cmake_params: -D CMAKE_CXX_FLAGS_DEBUG="/g"
+    runs-on: ${{ matrix.platform }}
+    name: ${{ matrix.platform }} - Qt ${{ matrix.qt_version }}
+    env:
+        CXXFLAGS: ${{ matrix.CXXFLAGS }}
+        MAKEFLAGS: ${{ matrix.MAKEFLAGS }}
+        QMAKE_MSC_VER: ${{ matrix.QMAKE_MSC_VER }}
+        CMAKE_PREFIX_PATH: $Qt6_DIR/lib/cmake
+        CMAKE_CXX_FLAGS_DEBUG: ${{ matrix.CMAKE_CXX_FLAGS_DEBUG }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2.3.4
+
+      - name: Install Qt
+        if: matrix.qt_version != 'system'
+        uses: jurplel/install-qt-action@v2.14.0
+        with:
+          version: ${{ matrix.qt_version }}
+      - name: Build with CMake
+        if: startsWith(matrix.qt_version, '6.')
+        run: |
+          mkdir build-cmake
+          cd build-cmake
+          cmake .. ${{ matrix.additional_arguments }}  ${{ matrix.cmake_params }}
+          cmake --build .
+
+
+
+
