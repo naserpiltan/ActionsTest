@@ -29,6 +29,14 @@ jobs:
           cd build-cmake
           cmake .. -D QT_DEFAULT_MAJOR_VERSION=6  -D CMAKE_CXX_FLAGS_DEBUG="/g"
           cmake --build .
+      - name: Upload windows binary artifacts
+                 if: ${{ 'windows-latest' == 'windows-latest' }}
+                 uses: actions/upload-artifact@v2
+                 with:
+                   name: windows
+                   retention-days: 1
+                   path: |
+                     ActionsTest/ActionsTest/release/*.zip
 
 
 
