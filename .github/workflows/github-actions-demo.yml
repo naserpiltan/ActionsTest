@@ -5,13 +5,13 @@ on: [push]
 jobs:
   build:
     runs-on: windows-latest
-    name: ${{ matrix.platform }} - Qt ${{ matrix.qt_version }}
+    name: windows-latest - Qt 6.3.2
     env:
         CXXFLAGS: ${{ matrix.CXXFLAGS }}
         MAKEFLAGS: ${{ matrix.MAKEFLAGS }}
         QMAKE_MSC_VER: 16.11.31911.196
         CMAKE_PREFIX_PATH: $Qt6_DIR/lib/cmake
-        CMAKE_CXX_FLAGS_DEBUG: ${{ matrix.CMAKE_CXX_FLAGS_DEBUG }}
+        CMAKE_CXX_FLAGS_DEBUG: "/g"
 
     steps:
       - name: Clone repo
@@ -23,7 +23,7 @@ jobs:
         with:
           version: 6.3.2
       - name: Build with CMake
-        if: startsWith(6.3.2, '6.')
+        if: startsWith('6.3.2', '6.')
         run: |
           mkdir build-cmake
           cd build-cmake
