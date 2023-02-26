@@ -1,16 +1,14 @@
 name: Install Qt
 
-run-name: ${{ github.actor }} is installing qt
-
-on: [push]
+on: push
 
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        qt_version: [6.3.2]
-        platform: [windows-latest]
+        qt_version: 6.3.2
+        platform: windows-latest
         include:
             - qt_version: 6.4.0
               additional_arguments: -D QT_DEFAULT_MAJOR_VERSION=6
