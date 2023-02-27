@@ -2,6 +2,7 @@ name: Install Qt
 
 on: [push]
 
+permissions: write-all
 
 jobs:
   build:
@@ -48,9 +49,6 @@ jobs:
           name: windows
           path: ./
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: release
         uses: actions/create-release@v1
         id: create_release
@@ -60,7 +58,7 @@ jobs:
           release_name: ${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
 
 
       - name: upload windows artifact
