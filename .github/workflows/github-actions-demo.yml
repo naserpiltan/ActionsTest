@@ -32,7 +32,7 @@ jobs:
           cmake --build .
       - name: Deploy
         run: |
-          D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\bin\windeployqt.exe --qmldirD:\a\ActionsTest\Qt\6.3.2\msvc2019_64\qml  D:\a\ActionsTest\ActionsTest\build-cmake\Debug\appuntitled11.exe
+          D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\bin\windeployqt.exe --qmldir D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\qml  D:\a\ActionsTest\ActionsTest\build-cmake\Debug\appuntitled11.exe
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
