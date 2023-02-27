@@ -41,6 +41,20 @@ jobs:
           path: |
             D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
 
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ActionsTest
+          tag_name: Version1
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+
+
 
 
 
