@@ -50,7 +50,7 @@ jobs:
           name: windows
           path: ./
 
-      - name: 'Echo download path'
+      - name: Echo download path
           run: echo ${{steps.download.outputs.download-path}}
 
       - name: release
