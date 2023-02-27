@@ -39,7 +39,7 @@ jobs:
         with:
           name: windows
           path: |
-            D:\a\ActionsTest\ActionsTest\build-cmake\Debug\appuntitled11.exe
+            D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
 
 
 
