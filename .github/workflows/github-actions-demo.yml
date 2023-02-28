@@ -37,22 +37,22 @@ jobs:
         run: |
           D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\bin\windeployqt.exe --qmldir D:\a\ActionsTest\Qt\6.3.2\msvc2019_64\qml  D:\a\ActionsTest\ActionsTest\build-cmake\Debug\appuntitled11.exe
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: windows
-          path: |
-            D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
+      #- name: Upload artifacts
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: windows
+      #    path: |
+      #      D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
 
       #- name: Download the artifact
-        #uses: actions/download-artifact@v2
-        #with:
-        #  name: windows
-        #  path: ./
+      #  uses: actions/download-artifact@v2
+      #  with:
+      #    name: windows
+      #    path: ./
 
-      - name: Build project
-        run: |
-          zip --junk-paths windows
+      #- name: Build project
+      #  run: |
+      #    zip --junk-paths windows
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -76,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: D:\a\ActionsTest\ActionsTest\
+          asset_path: D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
           asset_name: windows.zip
           asset_content_type: application/zip
 
