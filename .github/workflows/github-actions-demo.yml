@@ -44,11 +44,15 @@ jobs:
           path: |
             D:\a\ActionsTest\ActionsTest\build-cmake\Debug\
 
-      - name: Download the artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: windows
-          path: ./
+      #- name: Download the artifact
+        #uses: actions/download-artifact@v2
+        #with:
+        #  name: windows
+        #  path: ./
+
+      - name: Build project
+        run: |
+          zip --junk-paths windows
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -71,7 +75,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: D:\a\ActionsTest\ActionsTest\windows.zip
+          asset_path: D:\a\ActionsTest\ActionsTest\
           asset_name: windows.zip
           asset_content_type: application/zip
 
